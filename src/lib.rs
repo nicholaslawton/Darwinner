@@ -1,14 +1,18 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+pub trait Domain {}
+
+pub struct Situation(pub Vec<u8>);
+
+#[derive(Debug, PartialEq, PartialOrd)]
+pub struct Evaluation(u32);
+
+pub struct Tactician {}
+
+impl Tactician {
+    pub fn evaluate(&self, _situation: &Situation) -> Evaluation {
+        Evaluation(0)
+    }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+pub fn evolve(_domain: &impl Domain) -> Tactician {
+    Tactician {}
 }
