@@ -1,9 +1,9 @@
-use crate::tactician::Tactician;
+use crate::individual::Individual;
 use nonempty::NonEmpty;
 use rand::random;
 use std::num::NonZeroUsize;
 
-pub struct Population(NonEmpty<Tactician>);
+pub struct Population(NonEmpty<Individual>);
 
 impl Population {
     pub fn initialise(size: NonZeroUsize) -> Population {
@@ -13,8 +13,8 @@ impl Population {
         })
     }
 
-    pub fn most_successful(&self) -> &Tactician {
-        let Population(tacticians) = self;
-        &tacticians.head
+    pub fn most_successful(&self) -> &Individual {
+        let Population(individuals) = self;
+        &individuals.head
     }
 }

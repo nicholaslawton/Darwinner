@@ -26,19 +26,19 @@ impl Distribution<EvaluationExpression> for Standard {
 }
 
 #[derive(Clone, Copy)]
-pub struct Tactician {
+pub struct Individual {
     evaluation_rules: EvaluationExpression,
 }
 
-impl Tactician {
+impl Individual {
     pub fn evaluate(&self, situation: &Situation) -> Evaluation {
         self.evaluation_rules.evaluate(situation)
     }
 }
 
-impl Distribution<Tactician> for Standard {
-    fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Tactician {
-        Tactician {
+impl Distribution<Individual> for Standard {
+    fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Individual {
+        Individual {
             evaluation_rules: rng.gen(),
         }
     }

@@ -1,17 +1,17 @@
 mod domain;
 mod environment;
+mod individual;
 mod population;
 mod situation;
-mod tactician;
 
 pub use domain::Domain;
+pub use environment::Environment;
 pub use situation::Situation;
 
-pub use environment::Environment;
+use individual::Individual;
 use population::Population;
-use tactician::Tactician;
 
-pub fn evolve(_domain: &impl Domain, env: &Environment) -> Tactician {
+pub fn evolve(_domain: &impl Domain, env: &Environment) -> Individual {
     let pop = Population::initialise(env.population_size);
     *pop.most_successful()
 }
