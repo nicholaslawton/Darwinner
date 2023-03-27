@@ -31,8 +31,8 @@ pub struct Tactician {
 }
 
 impl Tactician {
-    pub fn evaluate(&self, _situation: &Situation) -> Evaluation {
-        self.evaluation_rules.evaluate(_situation)
+    pub fn evaluate(&self, situation: &Situation) -> Evaluation {
+        self.evaluation_rules.evaluate(situation)
     }
 }
 

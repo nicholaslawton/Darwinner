@@ -23,19 +23,26 @@ impl State {
 }
 
 #[test]
-fn most_successful_tactician_evaluation_correlates_directly_with_score() {
+fn most_successful_tactician_evaluation_correlates_directly_with_score_every_time() {
     let domain: Trivial = Trivial::new();
     let env: Environment = Environment {
         population_size: NonZeroUsize::new(100).unwrap(),
     };
-    let most_successful = evolve(&domain, &env);
-    let ordered_scores = (0..10u8).map(|x| State {
-        player: x,
-        opponent: 0,
-    });
-    let evaluations = ordered_scores.map(|x| most_successful.evaluate(&x.situation()));
-    evaluations.reduce(|n, x| {
-        assert!(x > n, "{:?} > {:?}", x, n);
-        x
-    });
+    let ordered_scores: Vec<State> = (0..10u8)
+        .map(|x| State {
+            player: x,
+            opponent: 0,
+        })
+        .collect();
+    (1..10)
+        .map(|_| evolve(&domain, &env))
+        .for_each(|most_successful| {
+            let evaluations = ordered_scores
+                .iter()
+                .map(|x| most_successful.evaluate(&x.situation()));
+            evaluations.reduce(|n, x| {
+                assert!(x > n, "{:?} > {:?}", x, n);
+                x
+            });
+        });
 }
