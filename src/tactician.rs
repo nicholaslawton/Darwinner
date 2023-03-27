@@ -6,7 +6,7 @@ use super::situation::Situation;
 #[derive(Debug, PartialEq, PartialOrd)]
 pub struct Evaluation(f64);
 
-#[derive(Clone, Debug)]
+#[derive(Clone)]
 enum EvaluationExpression {
     Read(usize),
 }
@@ -25,7 +25,6 @@ impl Distribution<EvaluationExpression> for Standard {
     }
 }
 
-#[derive(Debug)]
 pub struct Tactician {
     evaluation_rules: EvaluationExpression,
 }
