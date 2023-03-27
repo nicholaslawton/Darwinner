@@ -17,14 +17,15 @@ struct State {
 
 impl State {
     fn situation(&self) -> Situation {
-        Situation(vec![self.player, self.opponent])
+        Situation::from_binary(vec![self.player, self.opponent])
     }
 }
 
 #[test]
-fn most_successful_tactic_evaluation_correlates_directly_with_score() {
+fn most_successful_tactician_evaluation_correlates_directly_with_score() {
     let domain: Trivial = Trivial::new();
     let most_successful = evolve(&domain);
+    println!("most_successful: {:?}", most_successful);
     let ordered_scores = (0..10u8).map(|x| State {
         player: x,
         opponent: 0,
