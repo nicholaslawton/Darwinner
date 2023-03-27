@@ -1,12 +1,12 @@
 use rand::distributions::{Distribution, Standard};
 use rand::Rng;
 
-use super::situation::Situation;
+use crate::situation::Situation;
 
 #[derive(Debug, PartialEq, PartialOrd)]
 pub struct Evaluation(f64);
 
-#[derive(Clone)]
+#[derive(Clone, Copy)]
 enum EvaluationExpression {
     Read(usize),
 }
@@ -25,6 +25,7 @@ impl Distribution<EvaluationExpression> for Standard {
     }
 }
 
+#[derive(Clone, Copy)]
 pub struct Tactician {
     evaluation_rules: EvaluationExpression,
 }
