@@ -6,12 +6,10 @@ impl Situation {
     }
 
     pub fn read(&self, n: &usize) -> u8 {
-        match self {
-            Situation(s) =>
-                match s.get(n % s.len()) {
-                    Some(x) => *x,
-                    None => panic!("Core function failure: Vec::get returned None for index obtained using the remainder operator with Vec::len"),
-                }
+        let Situation(s) = self;
+        match s.get(n % s.len()) {
+            Some(x) => *x,
+            None => panic!("Core function failure: Vec::get returned None for index obtained using the remainder operator with Vec::len"),
         }
     }
 }
