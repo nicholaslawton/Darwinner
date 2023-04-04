@@ -1,6 +1,7 @@
 use crate::individual::Individual;
 use nonempty::NonEmpty;
-use rand::random;
+use rand::seq::IteratorRandom;
+use rand::{random, Rng};
 use std::num::NonZeroUsize;
 
 pub struct Population(NonEmpty<Individual>);
@@ -13,8 +14,10 @@ impl Population {
         })
     }
 
-    pub fn most_successful(&self) -> &Individual {
-        let Population(individuals) = self;
-        &individuals.head
+    pub fn choose_individuals<R>(&self, rng: &mut R, n: usize) -> Vec<&Individual>
+    where
+        R: Rng + ?Sized,
+    {
+        self.0.iter().choose_multiple(rng, n)
     }
 }

@@ -1,4 +1,6 @@
+mod contest;
 mod domain;
+mod duel;
 mod environment;
 mod evolution;
 mod individual;
